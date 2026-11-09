@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0c100f">
+<meta name="description" content="Secure Vault helps you organize your personal information, banking details, notes and important documents in one place.">
+<title>Secure Vault — Your Personal Space</title>
+
+<style>
+:root {
+  --bg:#0c100f;
+  --surface:#141b18;
+  --card:#19221e;
+  --text:#f3f7f4;
+  --muted:#9aa9a0;
+  --green:#10b981;
+  --border:#26342d;
+}
+body.light {
+  --bg:#f7faf8;
+  --surface:#ffffff;
+  --card:#edf5f0;
+  --text:#17231c;
+  --muted:#69796f;
+  --green:#079568;
+  --border:#dce9e0;
+}
+* {box-sizing:border-box;margin:0;padding:0}
+html {scroll-behavior:smooth}
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,sans-serif;
+  transition:.3s;
+  line-height:1.6;
+}
+a {text-decoration:none;color:inherit}
+.container {width:min(1120px,90%);margin:auto}
+nav {
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.logo {display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
+.logo-icon {
+  background:var(--green);
+  color:white;
+  width:38px;height:38px;
+  border-radius:12px;
+  display:grid;place-items:center;
+}
+.nav-links {display:flex;gap:28px;align-items:center;color:var(--muted);font-size:14px}
+.nav-links a:hover {color:var(--green)}
+.btn {
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:9px;padding:13px 22px;border-radius:12px;
+  background:var(--green);color:white;font-weight:700;
+  border:0;cursor:pointer;transition:.25s;
+}
+.btn:hover {transform:translateY(-3px);filter:brightness(1.1)}
+.btn-outline {background:transparent;border:1px solid var(--border);color:var(--text)}
+.theme-btn {
+  background:var(--card);border:1px solid var(--border);
+  color:var(--text);padding:10px;border-radius:12px;cursor:pointer;
+}
+.hero {
+  padding:100px 0 85px;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:65px;
+}
+.eyebrow {
+  display:inline-block;padding:7px 13px;
+  background:rgba(16,185,129,.12);
+  color:var(--green);border-radius:30px;
+  font-size:12px;font-weight:700;margin-bottom:22px;
+}
+h1 {font-size:clamp(42px,5.5vw,66px);line-height:1.08;letter-spacing:-2.5px}
+.gradient {color:var(--green)}
+.hero p {color:var(--muted);font-size:17px;margin:24px 0 30px;max-width:490px}
+.hero-actions {display:flex;gap:12px;flex-wrap:wrap}
+.trust {margin-top:25px;color:var(--muted);font-size:12px}
+.preview-wrap {
+  position:relative;padding:20px;
+  background:radial-gradient(circle at center,rgba(16,185,129,.16),transparent 70%);
+}
+.app-preview {
+  background:#141916;border:1px solid #34453b;
+  color:#f2f7f3;border-radius:25px;
+  padding:22px;max-width:430px;margin:auto;
+  box-shadow:0 30px 90px rgba(0,0,0,.35);
+  transform:rotate(1deg);
+}
+.app-head {display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.app-brand {display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700}
+.app-brand span:first-child {background:#10b981;padding:10px;border-radius:11px}
+.app-search {background:#202923;padding:12px;border-radius:10px;color:#a7b6ac;font-size:12px;margin-bottom:20px}
+.app-label {font-size:10px;color:#a7b6ac;margin-bottom:10px;letter-spacing:1px}
+.app-grid {display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.app-box {background:#202923;padding:15px;border-radius:12px;font-size:12px}
+.app-box strong {display:block;margin-top:6px}
+.app-item {background:#202923;margin-top:10px;padding:14px;border-radius:12px;font-size:11px}
+.app-item small {color:#10b981;display:block;margin-bottom:7px}
+.app-item b {font-size:12px}
+.floating {
+  position:absolute;right:0;bottom:35px;
+  background:var(--surface);border:1px solid var(--border);
+  padding:13px 17px;border-radius:13px;font-size:12px;
+  box-shadow:0 15px 35px #0003;
+}
+section {padding:85px 0}
+.section-head {text-align:center;max-width:620px;margin:0 auto 48px}
+.section-head h2 {font-size:clamp(30px,4vw,43px);letter-spacing:-1px}
+.section-head p {color:var(--muted);margin-top:13px}
+.features {display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feature {
+  padding:28px;background:var(--surface);
+  border:1px solid var(--border);border-radius:18px;
+  transition:.3s;
+}
+.feature:hover {transform:translateY(-5px);border-color:var(--green)}
+.feature-icon {
+  background:rgba(16,185,129,.12);
+  color:var(--green);width:46px;height:46px;
+  display:grid;place-items:center;border-radius:13px;
+  font-size:21px;margin-bottom:20px;
+}
+.feature h3 {font-size:17px;margin-bottom:9px}
+.feature p {font-size:13px;color:var(--muted)}
+.steps {display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.step {text-align:center;padding:25px}
+.step-number {font-size:35px;color:var(--green);font-weight:800}
+.step h3 {margin:10px 0}
+.step p {color:var(--muted);font-size:14px}
+.benefits {
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:25px;padding:50px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+}
+.benefits h2 {font-size:35px;line-height:1.2}
+.benefits p {color:var(--muted);margin-top:15px}
+.benefit-list {display:grid;gap:17px}
+.benefit {display:flex;gap:12px;align-items:center;font-size:14px}
+.check {color:var(--green);font-size:19px}
+.download {
+  text-align:center;padding:75px 25px;
+  background:linear-gradient(130deg,#0b4936,#10251c);
+  border-radius:25px;color:white;
+}
+.download h2 {font-size:clamp(30px,4vw,44px)}
+.download p {color:#c4ddd0;margin:15px auto 25px;max-width:500px}
+.download .btn {background:white;color:#08734e}
+.faq {max-width:750px;margin:auto}
+details {padding:20px 0;border-bottom:1px solid var(--border)}
+summary {cursor:pointer;font-weight:650}
+details p {color:var(--muted);font-size:14px;padding-top:12px}
+footer {border-top:1px solid var(--border);padding:35px 0;margin-top:70px}
+.footer-inner {display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer p,footer a {color:var(--muted);font-size:12px}
+footer a:hover {color:var(--green)}
+@media(max-width:800px) {
+  .hero {grid-template-columns:1fr;padding:70px 0;gap:35px}
+  .features {grid-template-columns:repeat(2,1fr)}
+  .benefits {grid-template-columns:1fr;padding:30px}
+  .nav-links {gap:12px;font-size:12px}
+}
+@media(max-width:520px) {
+  nav {height:65px}
+  .nav-links a:not(.nav-download) {display:none}
+  .features,.steps {grid-template-columns:1fr}
+  .hero {padding-top:55px}
+  .app-preview {padding:16px}
+  .floating {right:-5px;bottom:5px}
+  .benefits {padding:24px}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<nav>
+  <a href="#" class="logo">
+    <span class="logo-icon">✦</span>
+    Secure Vault
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#faq">FAQ</a>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">☼</button>
+    <a class="btn nav-download" href="#download">Get App ↗</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero">
+  <div>
+    <span class="eyebrow">✦ YOUR PERSONAL DIGITAL SPACE</span>
+    <h1>Everything important.<br><span class="gradient">One private place.</span></h1>
+    <p>
+      Keep your personal information, banking details,
+      notes and important records organized with Secure Vault.
+      Simple, organized and designed around you.
+    </p>
+    <div class="hero-actions">
+      <a href="#download" class="btn">↓ Download for Android</a>
+      <a href="#features" class="btn btn-outline">Explore features →</a>
+    </div>
+    <div class="trust">✦ Personal organization made simple.</div>
+  </div>
+
+  <div class="preview-wrap">
+    <div class="app-preview">
+      <div class="app-head">
+        <div class="app-brand">
+          <span>✦</span>
+          <span>Secure Vault<br><small style="color:#10b981">Personal Vault</small></span>
+        </div>
+        <span>⚙　＋</span>
+      </div>
+      <div class="app-search">⌕　Search vault items...</div>
+      <div class="app-label">▣ CATEGORIES & VAULT BOXES</div>
+      <div class="app-grid">
+        <div class="app-box">▣<strong>All Items</strong><small>3 items</small></div>
+        <div class="app-box">▤<strong>Banking</strong><small>1 item</small></div>
+        <div class="app-box">▣<strong>Personal Info</strong><small>1 item</small></div>
+        <div class="app-box">✧<strong>College</strong><small>1 item</small></div>
+        <div class="app-box">▤<strong>Finance</strong><small>0 items</small></div>
+        <div class="app-box">♧<strong>Social</strong><small>0 items</small></div>
+      </div>
+      <div class="app-label" style="margin-top:25px">ALL VAULT ITEMS</div>
+      <div class="app-item">
+        <small>▣　BANKING</small>
+        <b>Bank Account Details</b>
+        <div style="margin-top:12px;background:#141916;padding:12px;border-radius:9px">
+          <small>ACCOUNT NUMBER</small>
+          •••• •••• 1234
+        </div>
+      </div>
+    </div>
+    <div class="floating">✦ Organized in one place</div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="section-head">
+    <span class="eyebrow">WHAT YOU GET</span>
+    <h2>Your information, <span class="gradient">your organization.</span></h2>
+    <p>Keep different types of important information organized in dedicated categories.</p>
+  </div>
+  <div class="features">
+    <div class="feature"><div class="feature-icon">▣</div><h3>Personal Information</h3><p>Organize your important personal details in one place.</p></div>
+    <div class="feature"><div class="feature-icon">▤</div><h3>Banking Details</h3><p>Keep your banking records organized and accessible.</p></div>
+    <div class="feature"><div class="feature-icon">₹</div><h3>Finance Records</h3><p>Maintain your financial information in its own category.</p></div>
+    <div class="feature"><div class="feature-icon">✧</div><h3>College Records</h3><p>Keep useful college-related information together.</p></div>
+    <div class="feature"><div class="feature-icon">♧</div><h3>Social Information</h3><p>Organize your social account information.</p></div>
+    <div class="feature"><div class="feature-icon">▧</div><h3>PDF Documents</h3><p>Add and manage your important PDF documents.</p></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="section-head">
+    <span class="eyebrow">SIMPLE PROCESS</span>
+    <h2>How <span class="gradient">Secure Vault</span> works</h2>
+    <p>Get started in just a few simple steps.</p>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-number">01</div><h3>Download</h3><p>Download the Android application to your device.</p></div>
+    <div class="step"><div class="step-number">02</div><h3>Organize</h3><p>Create categories and add your important information.</p></div>
+    <div class="step"><div class="step-number">03</div><h3>Access</h3><p>Find and manage your saved information when needed.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="benefits">
+    <div>
+      <span class="eyebrow">WHY SECURE VAULT?</span>
+      <h2>A simpler way to manage your <span class="gradient">important records.</span></h2>
+      <p>Instead of keeping important information scattered across different places, bring your records together in an organized application.</p>
+    </div>
+    <div class="benefit-list">
+      <div class="benefit"><span class="check">✓</span> Dedicated categories for different records</div>
+      <div class="benefit"><span class="check">✓</span> Easy-to-use interface</div>
+      <div class="benefit"><span class="check">✓</span> Search your saved information</div>
+      <div class="benefit"><span class="check">✓</span> Light and dark appearance</div>
+      <div class="benefit"><span class="check">✓</span> Manage PDF documents</div>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="download">
+    <span class="eyebrow">YOUR PERSONAL VAULT AWAITS</span>
+    <h2>Get organized with Secure Vault.</h2>
+    <p>Download the Android application and start organizing your important information.</p>
+    <a href="app-release.apk" class="btn" download>↓ Download APK</a>
+    <p style="font-size:11px;margin-top:17px">Android application · APK installation</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="section-head">
+    <span class="eyebrow">NEED TO KNOW?</span>
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="faq">
+    <details><summary>What is Secure Vault?</summary><p>Secure Vault is an Android application designed to organize personal information, banking details, notes and documents.</p></details>
+    <details><summary>How can I install the application?</summary><p>Download the APK using the download button on this website. Open the downloaded file and follow Android's installation instructions.</p></details>
+    <details><summary>Is Secure Vault free?</summary><p>Check the application's current release and usage terms for pricing information.</p></details>
+    <details><summary>Does Secure Vault work offline?</summary><p>Offline availability depends on the application's implemented functionality. Refer to the app's actual behavior and privacy information.</p></details>
+    <details><summary>How is my information protected?</summary><p>Review the application's security and privacy documentation before storing sensitive information. Do not assume that data is encrypted or backed up unless those features have been verified.</p></details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo"><span class="logo-icon">✦</span> Secure Vault</div>
+      <p style="margin-top:10px">Your personal information, organized.</p>
+    </div>
+    <div>
+      <a href="#features">Features</a>　 
+      <a href="#download">Download</a>　 
+      <a href="#faq">FAQ</a>
+    </div>
+    <p>© <span id="year"></span> Secure Vault. All rights reserved.</p>
+  </div>
+</footer>
+
+</div>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
